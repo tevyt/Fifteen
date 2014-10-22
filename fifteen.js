@@ -108,43 +108,19 @@ window.onload = function () {
     
     }
    $("shufflebutton").onclick = function(){
-        positions = [];
-        for(var i = 0; i <= 300; i += 100){
-           for(var j = 0; j <= 300; j += 100){
-               positions.push([i,j]);
+        for (var i=0; i<600; i++)
+		{
+			var rand = Math.floor(Math.random() * 15) + 1;
+            //console.log(rand);
+            if(canMove(parseInt(piece[rand - 1].innerHTML))){
+               // console.log("Would swap");
+                swap(parseInt(piece[rand-1].innerHTML) - 1);
             }
         }
-       if(done){
-           for(var i = 1; i <= piece.length; i++){
-               piece[i-1].innerHTML = i;
-           }
-           done = false;
-       }
-       //console.log(positions[0]);
-       for(var i = 0; i < piece.length; i++){
-           piece[i].style.left = (i%4) * 1000 + 'px';
-           piece[i].style.top = parseInt(i/4) * 1000 + 'px';
-       }
-       
-       for(var i = 0; i < piece.length; i++){
-           var pos = Math.floor(Math.random() *positions.length) + 1
-           index = positions[pos - 1];
-           //console.log(pos);
-           piece[i].style.left = index[0] + 'px';
-           piece[i].style.top = index[1] + 'px';
-           //console.log(piece[i].style.left + " " + piece[i].style.top);
-           positions.splice(pos-1,1);
-           //console.log(positions.length);
-           //console.log(positions[pos-1]);
-           //console.log(piece[i].innerHTML);
-       }
-       emptyX = positions[0][0] + 'px';
-       emptyY = positions[0][1] + 'px';
-       
+	};
        
         
-    };
+};
         
  
     
-};
