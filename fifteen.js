@@ -108,7 +108,14 @@ window.onload = function () {
     
     }
    $("shufflebutton").onclick = function(){
-        for (var i=0; i<600; i++)
+        if(done){
+            done = false;
+            for(var i= 1; i <= 15; i++){
+                piece[i-1].innerHTML = i;
+            }
+        }
+       
+        for (var i=0; i<1000; i++)
 		{
 			var rand = Math.floor(Math.random() * 15) + 1;
             //console.log(rand);
