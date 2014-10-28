@@ -2,20 +2,23 @@ var piece;
 var emptyX = "300px";
 var emptyY = "300px";
 var done = false;
-
-function isFinished(){
-    for(var i =0; i < piece.length; i++){
-        if(piece[i].style.top !== parseInt(i/4) * 100 +'px' || piece[i].style.left !== parseInt(i%4) * 100 + 'px'){
+var selections;
+function isFinished() {
+    "use strict";
+    var i;
+    for (i = 0; i < piece.length; i += 1) {
+        if (piece[i].style.top !== parseInt(i / 4) * 100 +'px' || piece[i].style.left !== parseInt(i%4) * 100 + 'px'){
             return false;
         }
     }
     return true;
 }
 function endGame(){
-    for(var i = 0; i < piece.length; i++){
+    for (var i = 0; i < piece.length; i++){
         piece[i].innerHTML = "";
     }
     done = true;
+    alert("Puzzle Solved");
 }
 function swap(pos){
     var temp = piece[pos].style.top;
@@ -77,7 +80,12 @@ function canMove(position){
 }
 
 window.onload = function () {
+    $("controls").innerHTML += '<button class = "changePic">Spiderman</button>';
+    $("controls").innerHTML += '<button class = "changePic">Gir</button>';
+    $("controls").innerHTML += '<button class = "changePic">Power Puff Girls</button>';
     piece = $$("div#puzzlearea div");
+    selections = $$(".changePic");
+    console.log(selections.length);
     
     for (var i=0; i<piece.length; i++){
         piece[i].className = "puzzlepiece";
@@ -120,13 +128,31 @@ window.onload = function () {
 			var rand = Math.floor(Math.random() * 15) + 1;
             //console.log(rand);
             if(canMove(parseInt(piece[rand - 1].innerHTML))){
-               // console.log("Would swap");
+                
                 swap(parseInt(piece[rand-1].innerHTML) - 1);
+                console.log(emptyX + " " + emptyY);
             }
         }
 	};
-       
-        
+    for(var i = 0; i < selections.length; i++){
+        selections[i].onclick = function(){
+            if(this.innerHTML === "Spiderman"){
+               for(var j = 0; j <piece.length; j++){
+                    piece[j].style.backgroundImage = 'url("background.jpg")';
+                }
+            }
+            else if(this.innerHTML === "Gir"){
+                for(var j = 0; j <piece.length; j++){
+                    piece[j].style.backgroundImage = 'url("background2.png")';
+                }
+            }
+             else if(this.innerHTML === "Power Puff Girls"){
+               for(var j = 0; j <piece.length; j++){
+                    piece[j].style.backgroundImage = 'url("background3.jpg")';
+                }
+            }
+        }
+    }
 };
         
  
